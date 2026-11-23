@@ -44,7 +44,8 @@ public class Program {
         }
 
         //int averageAge = calculateAverageAge(people);
-        double averageAge = calculateAverageAge(people);
+        double sum = people.stream().map(Person::getAge).reduce(0, Integer::sum);
+        double averageAge = sum / people.size();
         // %.1f prints the average with one decimal place, %n ends the line
         System.out.printf("Average age: %.1f%n", averageAge);
 
@@ -86,13 +87,13 @@ public class Program {
     // Average = the sum of all ages divided by the number of people.
     // totalAge is a double on purpose: dividing an int by an int would
     // throw the decimals away (305 / 10 would give 30, not 30.5)
-    private static double calculateAverageAge(List<Person> people) {
-        double totalAge = 0;
-        for (Person person : people) {
-            totalAge += person.getAge();
-        }
-        return totalAge / people.size();
-    }
+//    private static double calculateAverageAge(List<Person> people) {
+//        double totalAge = 0;
+//        for (Person person : people) {
+//            totalAge += person.getAge();
+//        }
+//        return totalAge / people.size();
+//    }
 
     // Keeps the highest age seen so far. maxAge starts at the smallest
     // int there is, so the first person always replaces it
