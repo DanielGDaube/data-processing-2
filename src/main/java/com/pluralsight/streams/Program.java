@@ -4,6 +4,7 @@ import com.pluralsight.Person;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 /**
@@ -49,10 +50,11 @@ public class Program {
         // %.1f prints the average with one decimal place, %n ends the line
         System.out.printf("Average age: %.1f%n", averageAge);
 
-        int oldestAge = findOldestAge(people);
+//        int oldestAge = findOldestAge(people);
+        int oldestAge = people.stream().mapToInt(Person::getAge).max().orElseThrow(NoSuchElementException::new);
         System.out.println("Oldest person's age: " + oldestAge);
-
-        int youngestAge = findYoungestAge(people);
+        int youngestAge = people.stream().mapToInt(Person::getAge).min().orElseThrow(NoSuchElementException::new);
+//        int youngestAge = findYoungestAge(people);
         System.out.println("Youngest person's age: " + youngestAge);
     }
 
@@ -97,25 +99,25 @@ public class Program {
 
     // Keeps the highest age seen so far. maxAge starts at the smallest
     // int there is, so the first person always replaces it
-    private static int findOldestAge(List<Person> people) {
-        int maxAge = Integer.MIN_VALUE;
-        for (Person person : people) {
-            if (person.getAge() > maxAge) {
-                maxAge = person.getAge();
-            }
-        }
-        return maxAge;
-    }
+//    private static int findOldestAge(List<Person> people) {
+//        int maxAge = Integer.MIN_VALUE;
+//        for (Person person : people) {
+//            if (person.getAge() > maxAge) {
+//                maxAge = person.getAge();
+//            }
+//        }
+//        return maxAge;
+//    }
 
     // The same idea the other way round: minAge starts at the biggest int
     // there is, and every lower age replaces it
-    private static int findYoungestAge(List<Person> people) {
-        int minAge = Integer.MAX_VALUE;
-        for (Person person : people) {
-            if (person.getAge() < minAge) {
-                minAge = person.getAge();
-            }
-        }
-        return minAge;
-    }
+//    private static int findYoungestAge(List<Person> people) {
+//        int minAge = Integer.MAX_VALUE;
+//        for (Person person : people) {
+//            if (person.getAge() < minAge) {
+//                minAge = person.getAge();
+//            }
+//        }
+//        return minAge;
+//    }
 }
